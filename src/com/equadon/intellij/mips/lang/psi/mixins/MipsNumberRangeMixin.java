@@ -20,12 +20,10 @@ import com.equadon.intellij.mips.lang.psi.MipsElementTypes;
 import com.equadon.intellij.mips.lang.psi.MipsNumberLiteral;
 import com.equadon.intellij.mips.lang.psi.impl.MipsNamedElementImpl;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MipsNumberRangeMixin extends MipsNamedElementImpl {

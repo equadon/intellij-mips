@@ -25,6 +25,9 @@
     <fileTypeFactory implementation="com.equadon.intellij.mips.lang.MipsFileTypeFactory"/>
     <iconProvider implementation="com.equadon.intellij.mips.icons.MipsIconProvider"/>
     <lang.parserDefinition language="MIPS" implementationClass="com.equadon.intellij.mips.lang.parser.MipsParserDefinition"/>
+
+    <lang.syntaxHighlighterFactory language="MIPS" implementationClass="com.equadon.intellij.mips.editor.MipsSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="com.equadon.intellij.mips.editor.MipsColorSettingsPage"/>
   </extensions>
 
   <actions>

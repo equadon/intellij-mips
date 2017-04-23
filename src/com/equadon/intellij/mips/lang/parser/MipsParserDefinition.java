@@ -33,7 +33,9 @@ import com.intellij.psi.tree.TokenSet;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.equadon.intellij.mips.lang.psi.MipsTokenTypes.*;
+import static com.equadon.intellij.mips.lang.psi.MipsTokenTypes.COMMENTS;
+import static com.equadon.intellij.mips.lang.psi.MipsTokenTypes.STRINGS;
+import static com.equadon.intellij.mips.lang.psi.MipsTokenTypes.WHITE_SPACES;
 
 public class MipsParserDefinition implements ParserDefinition {
   @NotNull
