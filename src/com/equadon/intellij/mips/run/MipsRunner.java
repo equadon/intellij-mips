@@ -16,24 +16,13 @@
 
 package com.equadon.intellij.mips.run;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.ui.RunContentDescriptor;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class MipsRunner extends DefaultProgramRunner {
-  @Nullable
-  @Override
-  protected RunContentDescriptor doExecute(RunProfileState runProfileState, ExecutionEnvironment executionEnvironment) throws ExecutionException {
-    return super.doExecute(runProfileState, executionEnvironment);
-  }
-
   @NotNull
   @Override
   public String getRunnerId() {

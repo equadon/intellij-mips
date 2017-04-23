@@ -54,7 +54,6 @@ public class MarsRunner extends Thread {
   }
 
   private void initialize() {
-    // Ugly hack to intercept System.out and System.in
     System.setOut(new ConsolePrintStream(inputStream));
     System.setIn(inputStream);
   }

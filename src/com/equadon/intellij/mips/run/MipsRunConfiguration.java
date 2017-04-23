@@ -16,6 +16,7 @@
 
 package com.equadon.intellij.mips.run;
 
+import com.equadon.intellij.mips.run.debugger.MipsDebugConsoleState;
 import com.equadon.intellij.mips.run.ui.MipsRunConfigurationEditor;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -24,6 +25,7 @@ import com.intellij.execution.configurations.LocatableConfigurationBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
+import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
@@ -49,7 +51,13 @@ public class MipsRunConfiguration extends LocatableConfigurationBase implements 
   @Nullable
   @Override
   public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
-    return new MipsConsoleState(this, getProject());
+    boolean isDebugger = executor.getId().equals(DefaultDebugExecutor.EXECUTOR_ID);
+
+    if (isDebugger) {
+      return new MipsDebugConsoleState(this, getProject());
+    } else {
+      return new MipsConsoleState(this, getProject());
+    }
   }
 
   @NotNull

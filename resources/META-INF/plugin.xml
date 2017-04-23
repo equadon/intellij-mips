@@ -54,6 +54,10 @@
     <programRunner implementation="com.equadon.intellij.mips.run.MipsRunner"/>
     <runConfigurationProducer implementation="com.equadon.intellij.mips.run.MipsRunConfigurationProducer"/>
 
+    <!-- Debug -->
+    <programRunner implementation="com.equadon.intellij.mips.run.debugger.MipsDebugRunner"/>
+    <xdebugger.breakpointType implementation="com.equadon.intellij.mips.run.debugger.MipsLineBreakpointType"/>
+
     <!-- File templates -->
     <createFromTemplateHandler implementation="com.equadon.intellij.mips.template.MipsCreateFromTemplateHandler"/>
     <internalFileTemplate name="MIPS Application"/>
