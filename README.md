@@ -9,6 +9,8 @@ and simulate MIPS assembly files.
 
 * Syntax highlighting
 * Simulate MIPS programs
+* Debugger
+  * Breakpoints
 * Registers tool window
 * Structure view
 * Goto symbol
