@@ -1,0 +1,13 @@
+# DATA segment
+.data
+
+# TEXT segment
+.text
+.globl main
+
+# Main function
+main:
+
+exit:
+  li ${DS}v0, 10
+  syscall

@@ -1,0 +1,24 @@
+<templateSet group="MIPS">
+  <template name="string" value="$LABEL$: .asciiz &quot;$STRING$&quot;&#10;$END$" description="define a string" toReformat="true" toShortenFQNames="true">
+    <variable name="LABEL" expression="" defaultValue="&quot;myLabel&quot;" alwaysStopAt="true" />
+    <variable name="STRING" expression="" defaultValue="&quot;\n&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="MIPS_DECLARATION" value="true" />
+      <option name="OTHER" value="false" />
+    </context>
+  </template>
+  <template name="exit" value="$LABEL$:&#10;  li $v0, 10&#10;  syscall$END$" description="exit application" toReformat="true" toShortenFQNames="true">
+    <variable name="LABEL" expression="" defaultValue="&quot;exit&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="MIPS_DECLARATION" value="true" />
+      <option name="OTHER" value="false" />
+    </context>
+  </template>
+  <template name="ps" value="li $v0, 4&#10;la $a0, $LABEL$&#10;syscall$END$" description="print string" toReformat="true" toShortenFQNames="true">
+    <variable name="LABEL" expression="" defaultValue="&quot;stringLabel&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="MIPS_DECLARATION" value="true" />
+      <option name="OTHER" value="false" />
+    </context>
+  </template>
+</templateSet>

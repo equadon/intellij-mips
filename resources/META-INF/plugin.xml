@@ -45,9 +45,21 @@
 
     <spellchecker.support language="MIPS" implementationClass="com.equadon.intellij.mips.spellchecker.MipsSpellCheckingStrategy" />
     <spellchecker.bundledDictionaryProvider implementation="com.equadon.intellij.mips.spellchecker.MipsBundledDictionaryProvider"/>
+
+    <!-- File templates -->
+    <createFromTemplateHandler implementation="com.equadon.intellij.mips.template.MipsCreateFromTemplateHandler"/>
+    <internalFileTemplate name="MIPS Application"/>
+
+    <!-- Live templates -->
+    <defaultLiveTemplatesProvider implementation="com.equadon.intellij.mips.template.MipsLiveTemplateProvider"/>
+    <liveTemplateContext implementation="com.equadon.intellij.mips.template.MipsContextType$Generic"/>
+    <liveTemplateContext implementation="com.equadon.intellij.mips.template.MipsContextType$Declaration"/>
   </extensions>
 
   <actions>
+    <action id="MIPS.NewMipsFile" class="com.equadon.intellij.mips.actions.CreateMipsFileAction" text="MIPS Application" description="Create new MIPS file">
+      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile"/>
+    </action>
   </actions>
 
 </idea-plugin>
