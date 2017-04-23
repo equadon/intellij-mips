@@ -28,6 +28,9 @@
 
     <lang.syntaxHighlighterFactory language="MIPS" implementationClass="com.equadon.intellij.mips.editor.MipsSyntaxHighlighterFactory"/>
     <colorSettingsPage implementation="com.equadon.intellij.mips.editor.MipsColorSettingsPage"/>
+
+    <annotator language="MIPS" implementationClass="com.equadon.intellij.mips.editor.MipsAnnotator"/>
+    <codeInsight.lineMarkerProvider language="MIPS" implementationClass="com.equadon.intellij.mips.editor.MipsLabelSeparatorProvider"/>
   </extensions>
 
   <actions>

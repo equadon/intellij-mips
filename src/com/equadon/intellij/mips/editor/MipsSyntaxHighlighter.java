@@ -36,6 +36,7 @@ public class MipsSyntaxHighlighter extends SyntaxHighlighterBase {
   public static final TextAttributesKey OPERATOR = TextAttributesKey.createTextAttributesKey("MIPS_OPERATOR", DefaultLanguageHighlighterColors.KEYWORD);
   public static final TextAttributesKey DIRECTIVE = TextAttributesKey.createTextAttributesKey("MIPS_DIRECTIVE", DefaultLanguageHighlighterColors.STATIC_FIELD);
   public static final TextAttributesKey LABEL = TextAttributesKey.createTextAttributesKey("MIPS_LABEL", DefaultLanguageHighlighterColors.IDENTIFIER);
+  public static final TextAttributesKey MAIN_LABEL = TextAttributesKey.createTextAttributesKey("MIPS_MAIN_LABEL", DefaultLanguageHighlighterColors.STATIC_METHOD);
 
   public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("MIPS_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("MIPS_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
