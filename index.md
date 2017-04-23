@@ -1,11 +1,9 @@
-# MIPS assembly language plugin
-
 MIPS assembly language plugin for [JetBrains](https://www.jetbrains.com/) IDEs
 ([PyCharm](https://www.jetbrains.com/pycharm/), [WebStorm](https://www.jetbrains.com/webstorm/), etc.).
 The plugin uses [MARS](http://courses.missouristate.edu/kenvollmar/mars/index.htm) to assemble
 and simulate MIPS assembly files.
 
-## Features
+# Features
 
 * Syntax highlighting
 * Simulate MIPS programs
