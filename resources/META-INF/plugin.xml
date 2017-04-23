@@ -49,6 +49,11 @@
     <!-- Tool windows -->
     <toolWindow id="MIPS Registers" secondary="true" icon="/icons/mips-tool-registers-13.png" anchor="right" factoryClass="com.equadon.intellij.mips.tools.registers.MipsRegistersToolWindowFactory"/>
 
+    <!-- Run -->
+    <configurationType implementation="com.equadon.intellij.mips.run.MipsRunConfigurationType"/>
+    <programRunner implementation="com.equadon.intellij.mips.run.MipsRunner"/>
+    <runConfigurationProducer implementation="com.equadon.intellij.mips.run.MipsRunConfigurationProducer"/>
+
     <!-- File templates -->
     <createFromTemplateHandler implementation="com.equadon.intellij.mips.template.MipsCreateFromTemplateHandler"/>
     <internalFileTemplate name="MIPS Application"/>
