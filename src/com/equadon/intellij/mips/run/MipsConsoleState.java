@@ -16,14 +16,12 @@
 
 package com.equadon.intellij.mips.run;
 
-import com.equadon.intellij.mips.lang.MipsLanguage;
+import com.equadon.intellij.mips.run.controllers.MarsSimulatorController;
 import com.intellij.execution.DefaultExecutionResult;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfileState;
-import com.intellij.execution.console.LanguageConsoleImpl;
-import com.intellij.execution.console.LanguageConsoleView;
 import com.intellij.execution.filters.TextConsoleBuilder;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.process.NopProcessHandler;
@@ -39,7 +37,7 @@ public class MipsConsoleState implements RunProfileState {
   private final MipsRunConfiguration cfg;
   private final Project project;
 
-  private MarsRunner marsRunner;
+  private MarsSimulatorController simulator;
 
   public MipsConsoleState(MipsRunConfiguration cfg, Project project) {
     this.cfg = cfg;
@@ -54,8 +52,8 @@ public class MipsConsoleState implements RunProfileState {
 
     ProcessHandler processHandler = new NopProcessHandler();
 
-    marsRunner = new MarsRunner(processHandler, console, cfg);
-    marsRunner.start();
+    simulator = new MarsSimulatorController(cfg, console, processHandler);
+    simulator.resume();
 
     return new DefaultExecutionResult(console, processHandler);
   }

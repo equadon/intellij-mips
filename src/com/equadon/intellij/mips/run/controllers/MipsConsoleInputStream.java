@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.equadon.intellij.mips.run;
+package com.equadon.intellij.mips.run.controllers;
 
 import com.equadon.intellij.mips.icons.MipsIcons;
-import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -28,8 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MipsConsoleInputStream extends InputStream {
-  private final MarsRunner runner;
-  private final ConsoleView console;
   private final Project project;
 
   private String message = null;
@@ -37,9 +34,7 @@ public class MipsConsoleInputStream extends InputStream {
 
   private boolean eof;
 
-  public MipsConsoleInputStream(MarsRunner runner, ConsoleView console, Project project) {
-    this.runner = runner;
-    this.console = console;
+  public MipsConsoleInputStream(Project project) {
     this.project = project;
 
     this.message = "";
