@@ -36,6 +36,10 @@
 
     <lang.braceMatcher language="MIPS" implementationClass="com.equadon.intellij.mips.MipsBraceMatcher"/>
     <lang.commenter language="MIPS" implementationClass="com.equadon.intellij.mips.MipsCommenter"/>
+
+    <codeStyleSettingsProvider implementation="com.equadon.intellij.mips.formatter.MipsCodeStyleSettingsProvider"/>
+    <langCodeStyleSettingsProvider implementation="com.equadon.intellij.mips.formatter.MipsLanguageCodeStyleSettingsProvider"/>
+    <lang.formatter language="MIPS" implementationClass="com.equadon.intellij.mips.formatter.MipsFormattingModelBuilder"/>
   </extensions>
 
   <actions>
