@@ -1,0 +1,33 @@
+<idea-plugin>
+  <id>com.equadon.intellij.mips</id>
+  <name>MIPS</name>
+  <version>0.1</version>
+  <vendor email="niklas.persson@gmail.com" url="http://www.equadon.com">Niklas Persson</vendor>
+
+  <description><![CDATA[
+      <p>MIPS assembly language plugin for IntelliJ IDEA.</p>
+    ]]></description>
+
+  <change-notes><![CDATA[
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileTypeFactory implementation="com.equadon.intellij.mips.lang.MipsFileTypeFactory"/>
+    <iconProvider implementation="com.equadon.intellij.mips.icons.MipsIconProvider"/>
+    <lang.parserDefinition language="MIPS" implementationClass="com.equadon.intellij.mips.lang.parser.MipsParserDefinition"/>
+  </extensions>
+
+  <actions>
+  </actions>
+
+</idea-plugin>
