@@ -33,6 +33,9 @@
 
     <annotator language="MIPS" implementationClass="com.equadon.intellij.mips.editor.MipsAnnotator"/>
     <codeInsight.lineMarkerProvider language="MIPS" implementationClass="com.equadon.intellij.mips.editor.MipsLabelSeparatorProvider"/>
+
+    <lang.braceMatcher language="MIPS" implementationClass="com.equadon.intellij.mips.MipsBraceMatcher"/>
+    <lang.commenter language="MIPS" implementationClass="com.equadon.intellij.mips.MipsCommenter"/>
   </extensions>
 
   <actions>
