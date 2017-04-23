@@ -62,7 +62,8 @@ directive_statement ::= DIRECTIVE directive_arg*
   methods = [getName setName getNumbers getIdentifier getString]
 }
 
-directive_arg   ::= number_list
+directive_arg   ::= number_range
+                  | number_list
                   | string_literal
                   | IDENTIFIER
 {
@@ -73,6 +74,13 @@ directive_arg   ::= number_list
 private number_list ::= number_literal (delimiter+ number_literal)*
 {
   pin = 1
+}
+
+number_range ::= number_literal COLON number_literal
+{
+  pin = 3
+  mixin = 'com.equadon.intellij.mips.lang.psi.mixins.MipsNumberRangeMixin'
+  methods = [getRangeStart getRangeEnd]
 }
 
 /** Instructions */
