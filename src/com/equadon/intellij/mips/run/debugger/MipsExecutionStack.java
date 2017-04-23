@@ -16,6 +16,7 @@
 
 package com.equadon.intellij.mips.run.debugger;
 
+import com.equadon.intellij.mips.run.controllers.MipsSimulatorController;
 import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
@@ -24,10 +25,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class MipsExecutionStack extends XExecutionStack {
   private final Project project;
-  private final MipsDebuggerController controller;
+  private final MipsSimulatorController controller;
   private final MipsStackFrame topFrame;
 
-  public MipsExecutionStack(Project project, MipsDebuggerController controller, String displayName, MipsStackFrame topFrame) {
+  public MipsExecutionStack(Project project, MipsSimulatorController controller, String displayName, MipsStackFrame topFrame) {
     super(displayName);
     this.project = project;
     this.controller = controller;

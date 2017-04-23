@@ -17,6 +17,7 @@
 package com.equadon.intellij.mips.run;
 
 import com.equadon.intellij.mips.run.controllers.MarsSimulatorController;
+import com.equadon.intellij.mips.run.controllers.MipsSimulatorController;
 import com.intellij.execution.DefaultExecutionResult;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
@@ -26,6 +27,7 @@ import com.intellij.execution.filters.TextConsoleBuilder;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.process.NopProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
@@ -34,26 +36,33 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MipsConsoleState implements RunProfileState {
-  private final MipsRunConfiguration cfg;
-  private final Project project;
+  protected final MipsRunConfiguration cfg;
+  protected final ExecutionEnvironment env;
+  protected final Project project;
+  protected final ConsoleView console;
 
-  private MarsSimulatorController simulator;
+  protected MipsSimulatorController controller;
 
-  public MipsConsoleState(MipsRunConfiguration cfg, Project project) {
+  public MipsConsoleState(MipsRunConfiguration cfg, ExecutionEnvironment env, Project project) {
     this.cfg = cfg;
+    this.env = env;
     this.project = project;
+
+    TextConsoleBuilder builder = TextConsoleBuilderFactory.getInstance().createBuilder(project);
+    this.console = builder.getConsole();
+  }
+
+  public ConsoleView getConsole() {
+    return console;
   }
 
   @Nullable
   @Override
   public ExecutionResult execute(Executor executor, @NotNull ProgramRunner runner) throws ExecutionException {
-    TextConsoleBuilder builder = TextConsoleBuilderFactory.getInstance().createBuilder(cfg.getProject());
-    ConsoleView console = builder.getConsole();
-
     ProcessHandler processHandler = new NopProcessHandler();
 
-    simulator = new MarsSimulatorController(cfg, console, processHandler);
-    simulator.resume();
+    controller = new MarsSimulatorController(cfg, console, processHandler);
+    controller.resume();
 
     return new DefaultExecutionResult(console, processHandler);
   }

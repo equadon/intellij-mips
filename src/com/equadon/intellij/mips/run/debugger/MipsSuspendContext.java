@@ -16,6 +16,7 @@
 
 package com.equadon.intellij.mips.run.debugger;
 
+import com.equadon.intellij.mips.run.controllers.MipsSimulatorController;
 import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.breakpoints.XBreakpoint;
@@ -26,14 +27,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class MipsSuspendContext extends XSuspendContext {
   private final Project project;
-  private final MipsDebuggerController controller;
+  private final MipsSimulatorController controller;
   private final XBreakpoint breakpoint;
   private final XSourcePosition position;
   private final int programCounter;
 
   private XExecutionStack executionStack;
 
-  public MipsSuspendContext(Project project, MipsDebuggerController controller, XBreakpoint breakpoint, int programCounter) {
+  public MipsSuspendContext(Project project, MipsSimulatorController controller, XBreakpoint breakpoint, int programCounter) {
     this.project = project;
     this.controller = controller;
     this.breakpoint = breakpoint;

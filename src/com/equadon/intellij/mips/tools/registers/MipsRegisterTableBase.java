@@ -20,6 +20,7 @@ import com.intellij.ui.table.JBTable;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Logger;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumnModel;
@@ -30,6 +31,8 @@ import mars.mips.hardware.Register;
 import mars.venus.NumberDisplayBaseChooser;
 
 public abstract class MipsRegisterTableBase extends JBTable implements Observer {
+  private final static Logger LOG = Logger.getLogger("MIPS");
+
   private boolean hexValues;
 
   public MipsRegisterTableBase() {
@@ -101,7 +104,7 @@ public abstract class MipsRegisterTableBase extends JBTable implements Observer 
 
   @Override
   public void update(Observable observable, Object o) {
-    System.out.println("DEBUG :: notification :: obs=" + observable + ", o=" + o);
+    LOG.info("DEBUG :: notification :: obs=" + observable + ", o=" + o);
     if (observable instanceof Settings) {
       Settings settings = (Settings) observable;
       hexValues = settings.getBooleanSetting(Settings.DISPLAY_VALUES_IN_HEX);

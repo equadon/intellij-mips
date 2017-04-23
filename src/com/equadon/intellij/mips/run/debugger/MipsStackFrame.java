@@ -16,6 +16,7 @@
 
 package com.equadon.intellij.mips.run.debugger;
 
+import com.equadon.intellij.mips.run.controllers.MipsSimulatorController;
 import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.XStackFrame;
@@ -24,11 +25,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class MipsStackFrame extends XStackFrame {
   private final Project project;
-  private final MipsDebuggerController controller;
+  private final MipsSimulatorController controller;
   private final XSourcePosition position;
   private final int index;
 
-  public MipsStackFrame(Project project, MipsDebuggerController controller, XSourcePosition position, int index) {
+  public MipsStackFrame(Project project, MipsSimulatorController controller, XSourcePosition position, int index) {
     this.project = project;
     this.controller = controller;
     this.position = position;

@@ -24,6 +24,9 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.breakpoints.XBreakpoint;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Simulator controllers should implement this interface to handle simulation and debugging.
  */
@@ -37,12 +40,14 @@ public abstract class MipsSimulatorController {
 
   protected MipsConsoleInputStream inputStream;
 
+  protected final List<XBreakpoint> breakpoints;
+
   public MipsSimulatorController(MipsRunConfiguration cfg, ConsoleView console, ProcessHandler processHandler) {
     this(false, cfg, console, processHandler, null, null);
   }
 
   public MipsSimulatorController(MipsRunConfiguration cfg, ConsoleView console, XDebugProcess process, XDebugSession session) {
-    this(true, cfg, console, null, process, session);
+    this(true, cfg, console, process.getProcessHandler(), process, session);
   }
 
   public MipsSimulatorController(boolean debugger,
@@ -59,6 +64,8 @@ public abstract class MipsSimulatorController {
     this.debugSession = debugSession;
 
     inputStream = new MipsConsoleInputStream(cfg.getProject());
+
+    breakpoints = new ArrayList<>();
 
     // Intercept System.out and System.in to handle output and input.
     System.setOut(new MipsConsoleOutputStream(this, inputStream));
@@ -94,7 +101,9 @@ public abstract class MipsSimulatorController {
   /**
    * Stop simulation.
    */
-  public abstract void stop();
+  public void stop() {
+    processHandler.destroyProcess();
+  }
 
   /**
    * Step one instruction.
@@ -105,13 +114,17 @@ public abstract class MipsSimulatorController {
    * Add new breakpoint.
    * @param breakpoint breakpoint to add
    */
-  public abstract void addBreakpoint(XBreakpoint breakpoint);
+  public void addBreakpoint(XBreakpoint breakpoint) {
+    breakpoints.add(breakpoint);
+  }
 
   /**
    * Remove breakpoint.
    * @param breakpoint breakpoint to remove
    */
-  public abstract void removeBreakpoint(XBreakpoint breakpoint);
+  public void removeBreakpoint(XBreakpoint breakpoint) {
+    breakpoints.remove(breakpoint);
+  }
 
   public void println(String message) {
     print(message + "\n");

@@ -17,12 +17,15 @@
 package com.equadon.intellij.mips.run.debugger;
 
 import com.equadon.intellij.mips.run.MipsRunConfiguration;
+import com.equadon.intellij.mips.run.controllers.MarsSimulatorController;
+import com.equadon.intellij.mips.run.controllers.MipsSimulatorController;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
@@ -33,6 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MipsDebugRunner extends DefaultProgramRunner {
+  private MipsDebugProcess debugProcess;
+
   @NotNull
   @Override
   public String getRunnerId() {
@@ -44,6 +49,10 @@ public class MipsDebugRunner extends DefaultProgramRunner {
     return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && profile instanceof MipsRunConfiguration;
   }
 
+  public MipsDebugProcess getDebugProcess() {
+    return debugProcess;
+  }
+
   @Nullable
   @Override
   protected RunContentDescriptor doExecute(@NotNull RunProfileState state, @NotNull ExecutionEnvironment env) throws ExecutionException {
@@ -53,7 +62,13 @@ public class MipsDebugRunner extends DefaultProgramRunner {
       @NotNull
       @Override
       public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
-        return new MipsDebugProcess(session, env);
+        debugProcess = new MipsDebugProcess(session, env);
+
+        MipsSimulatorController controller = new MarsSimulatorController(debugProcess.getRunConfig(), (ConsoleView) debugProcess.createConsole(), debugProcess, session);
+        debugProcess.setController(controller);
+//        controller.resume();
+
+        return debugProcess;
       }
     }).getRunContentDescriptor();
   }

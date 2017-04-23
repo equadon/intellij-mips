@@ -17,9 +17,9 @@
 package com.equadon.intellij.mips.run.debugger;
 
 import com.equadon.intellij.mips.run.MipsRunConfiguration;
+import com.equadon.intellij.mips.run.controllers.MipsSimulatorController;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
@@ -31,8 +31,12 @@ import com.intellij.xdebugger.frame.XSuspendContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.logging.Logger;
+
 public class MipsDebugProcess extends XDebugProcess {
-  private final MipsDebuggerController controller;
+  private final static Logger LOG = Logger.getLogger("MIPS");
+
+  private MipsSimulatorController controller;
   private final ExecutionEnvironment env;
 
   private MipsLineBreakpointHandler lineBreakpointHandler;
@@ -42,9 +46,14 @@ public class MipsDebugProcess extends XDebugProcess {
     super(session);
 
     this.env = env;
+    this.controller = null;
+
     lineBreakpointHandler = new MipsLineBreakpointHandler(this);
-    controller = new MipsDebuggerController(this, session);
     state = (MipsDebugConsoleState) getRunConfig().getState(env.getExecutor(), env);
+  }
+
+  public void setController(MipsSimulatorController controller) {
+    this.controller = controller;
   }
 
   @Override
@@ -70,19 +79,18 @@ public class MipsDebugProcess extends XDebugProcess {
   @NotNull
   @Override
   public ExecutionConsole createConsole() {
-    ConsoleView console = state.createConsoleView(env.getProject());
-    return console;
+    return state.getConsole();
   }
 
   @Override
   public void resume(@Nullable XSuspendContext context) {
-    System.out.println("DebugProcess.resume()");
+    LOG.info("DebugProcess.resume()");
     controller.resume();
   }
 
   @Override
   public void stop() {
-    System.out.println("DebugProcess.stop()");
+    LOG.info("DebugProcess.stop()");
     controller.stop();
   }
 
@@ -93,11 +101,11 @@ public class MipsDebugProcess extends XDebugProcess {
   }
 
   public void addBreakpoint(XBreakpoint breakpoint) {
-    System.out.println("DebugProcess.addBreakpoint()");
+    LOG.info("DebugProcess.addBreakpoint()");
     controller.addBreakpoint(breakpoint);
   }
 
   public void removeBreakpoint(XBreakpoint breakpoint, boolean temporary) {
-    System.out.println("DebugProcess.removeBreakpoint()");
+    LOG.info("DebugProcess.removeBreakpoint()");
   }
 }

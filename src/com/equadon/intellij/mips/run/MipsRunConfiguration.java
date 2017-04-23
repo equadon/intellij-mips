@@ -54,9 +54,9 @@ public class MipsRunConfiguration extends LocatableConfigurationBase implements 
     boolean isDebugger = executor.getId().equals(DefaultDebugExecutor.EXECUTOR_ID);
 
     if (isDebugger) {
-      return new MipsDebugConsoleState(this, getProject());
+      return new MipsDebugConsoleState(this, env, getProject());
     } else {
-      return new MipsConsoleState(this, getProject());
+      return new MipsConsoleState(this, env, getProject());
     }
   }
 
