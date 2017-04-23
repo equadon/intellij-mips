@@ -40,6 +40,8 @@
     <codeStyleSettingsProvider implementation="com.equadon.intellij.mips.formatter.MipsCodeStyleSettingsProvider"/>
     <langCodeStyleSettingsProvider implementation="com.equadon.intellij.mips.formatter.MipsLanguageCodeStyleSettingsProvider"/>
     <lang.formatter language="MIPS" implementationClass="com.equadon.intellij.mips.formatter.MipsFormattingModelBuilder"/>
+
+    <gotoSymbolContributor implementation="com.equadon.intellij.mips.MipsGotoSymbolContributor"/>
   </extensions>
 
   <actions>
