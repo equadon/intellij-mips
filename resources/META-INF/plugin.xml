@@ -42,6 +42,9 @@
     <lang.formatter language="MIPS" implementationClass="com.equadon.intellij.mips.formatter.MipsFormattingModelBuilder"/>
 
     <gotoSymbolContributor implementation="com.equadon.intellij.mips.MipsGotoSymbolContributor"/>
+
+    <spellchecker.support language="MIPS" implementationClass="com.equadon.intellij.mips.spellchecker.MipsSpellCheckingStrategy" />
+    <spellchecker.bundledDictionaryProvider implementation="com.equadon.intellij.mips.spellchecker.MipsBundledDictionaryProvider"/>
   </extensions>
 
   <actions>

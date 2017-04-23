@@ -1,0 +1,7 @@
+.data
+.byte
+.word
+.asciiz
+.globl
+.text
+syscall
