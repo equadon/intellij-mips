@@ -35,7 +35,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import mars.Globals;
 import mars.assembler.Directives;
+import mars.mips.instructions.Instruction;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -45,6 +47,7 @@ public class MipsCompletionContributor extends CompletionContributor {
       @Override
       protected void addCompletions(@NotNull CompletionParameters params, ProcessingContext context, @NotNull CompletionResultSet result) {
         suggestDirectives(result);
+        suggestInstructions(result);
       }
     });
   }
@@ -56,14 +59,27 @@ public class MipsCompletionContributor extends CompletionContributor {
       result.addElement(LookupElementBuilder.create(directive.getName())
           .withTailText(" " + directive.getDescription(), true)
           .withTypeText("Directive", false)
-          .withInsertHandler(new MipsDirectiveInsertHandler())
+          .withInsertHandler(new MipsInsertHandler())
           .withBoldness(true)
           .withIcon(MipsIcons.DIRECTIVE)
       );
     }
   }
 
-  private class MipsDirectiveInsertHandler implements InsertHandler<LookupElement> {
+  private void suggestInstructions(CompletionResultSet result) {
+    for (Object i : Globals.instructionSet.getInstructionList()) {
+      Instruction instruction = (Instruction) i;
+      result.addElement(LookupElementBuilder.create(instruction.getName())
+          .withTailText(" " + instruction.getDescription(), true)
+          .withTypeText("Instruction")
+          .withInsertHandler(new MipsInsertHandler())
+          .withBoldness(true)
+          .withIcon(MipsIcons.INSTRUCTION)
+      );
+    }
+  }
+
+  private class MipsInsertHandler implements InsertHandler<LookupElement> {
     @Override
     public void handleInsert(InsertionContext context, LookupElement element) {
       Editor editor = context.getEditor();
@@ -75,7 +91,7 @@ public class MipsCompletionContributor extends CompletionContributor {
       String text = document.getText().substring(start, context.getTailOffset());
 
       if (text.startsWith(".")) {
-        document.replaceString(start, tail, text.substring(1) + " ");
+        document.replaceString(start, tail, text.substring(1));
       }
     }
   }
