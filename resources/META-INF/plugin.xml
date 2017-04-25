@@ -43,6 +43,8 @@
 
     <gotoSymbolContributor implementation="com.equadon.intellij.mips.MipsGotoSymbolContributor"/>
 
+    <completion.contributor language="MIPS" implementationClass="com.equadon.intellij.mips.completion.MipsCompletionContributor"/>
+
     <spellchecker.support language="MIPS" implementationClass="com.equadon.intellij.mips.spellchecker.MipsSpellCheckingStrategy" />
     <spellchecker.bundledDictionaryProvider implementation="com.equadon.intellij.mips.spellchecker.MipsBundledDictionaryProvider"/>
 
