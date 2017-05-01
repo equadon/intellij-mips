@@ -23,4 +23,6 @@ import javax.swing.*;
 public interface MipsIcons {
   Icon FILE = IconLoader.getIcon("/icons/mips-file-16.png");
   Icon LABEL = IconLoader.getIcon("/icons/mips-label-16.png");
+  Icon DIRECTIVE = IconLoader.getIcon("/icons/mips-directive-16.png");
+  Icon INSTRUCTION = IconLoader.getIcon("/icons/mips-instruction-16.png");
 }

@@ -14,7 +14,7 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="ps" value="li $v0, 4&#10;la $a0, $LABEL$&#10;syscall$END$" description="print string" toReformat="true" toShortenFQNames="true">
+  <template name="prints" value="li $v0, 4&#10;la $a0, $LABEL$&#10;syscall$END$" description="print string" toReformat="true" toShortenFQNames="true">
     <variable name="LABEL" expression="" defaultValue="&quot;stringLabel&quot;" alwaysStopAt="true" />
     <context>
       <option name="MIPS_DECLARATION" value="true" />
