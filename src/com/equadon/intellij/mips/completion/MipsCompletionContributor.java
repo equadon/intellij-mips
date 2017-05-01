@@ -34,6 +34,8 @@ import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mars.Globals;
 import mars.assembler.Directives;
@@ -42,6 +44,8 @@ import mars.mips.instructions.Instruction;
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 public class MipsCompletionContributor extends CompletionContributor {
+  private static final Pattern INSTRUCTION_ID = Pattern.compile("^([^\\d]+)\\d{3} $");
+
   public MipsCompletionContributor() {
     extend(CompletionType.BASIC, psiElement().withParent(MipsFile.class), new CompletionProvider<CompletionParameters>() {
       @Override
@@ -67,13 +71,17 @@ public class MipsCompletionContributor extends CompletionContributor {
   }
 
   private void suggestInstructions(CompletionResultSet result) {
+    int n = 1;
     for (Object i : Globals.instructionSet.getInstructionList()) {
       Instruction instruction = (Instruction) i;
-      result.addElement(LookupElementBuilder.create(instruction.getName())
+      String name = String.format("%s%03d ", instruction.getName(), n++);
+
+      result.addElement(LookupElementBuilder.create(name)
           .withTailText(" " + instruction.getDescription(), true)
           .withTypeText("Instruction")
           .withInsertHandler(new MipsInsertHandler())
           .withBoldness(true)
+          .withPresentableText(instruction.getExampleFormat())
           .withIcon(MipsIcons.INSTRUCTION)
       );
     }
@@ -92,6 +100,12 @@ public class MipsCompletionContributor extends CompletionContributor {
 
       if (text.startsWith(".")) {
         document.replaceString(start, tail, text.substring(1));
+      } else {
+        Matcher m = INSTRUCTION_ID.matcher(text);
+
+        if (m.matches()) {
+          document.replaceString(tail - 4, tail - 1, "");
+        }
       }
     }
   }
