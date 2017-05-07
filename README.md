@@ -18,6 +18,7 @@ and simulate MIPS assembly files.
 * Folding (only multi-line comments currently)
 * Live and file templates
 * Commenter
+* Code completion
 
 ## Known issues
 
